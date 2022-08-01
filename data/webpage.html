@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather server</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="icon" href="favicon.ico">
+</head>
+<body>
+<div class = "topnav">
+  <h1>Live Weather Status</h1>
+</div class = "content">
+<div class = "display"><h2>
+  Temperature: <text1><span id="temp">%TEMP%</span>C</text1><div class =circle id="tani"></div><br>
+  Pressure: <text1><span id="pres">%PRES%</span>Bar</text1><div class =circle id="pani"></div><br>
+  Altitude: <text1><span id="alti">%ALTI%</span>m</text1><div class =circle id="aani"></div><br><br>
+  Current Status:<br>
+  <text1><span id="status">%STATUS%</span></text1><div class =circle id="sani"></div><br>
+</h2>
+</div>
+<div>
+  <br>
+  <button class="button" onclick="updatenow()">Update Now!</button>
+</div>
+<script>
+window.addEventListener('load', onLoad)
+var gateway = `ws://${window.location.hostname}/ws`;
+var ADCws;
+function initWebSockets() {
+  console.log('WebSocket Connection Initiated...');
+  ADCws = new WebSocket(gateway);
+  ADCws.onopen = onOpen;
+  ADCws.onclose = onClose;
+  ADCws.onmessage = onMessage;
+}
+function onOpen(event) {
+  ADCws.send("Update");
+  console.log('Connection Success');
+}
+function onMessage(event) {
+  var data;
+  data = event.data;
+  if(String(data).substring(0,2)=="t?"){
+    document.getElementById('temp').innerHTML = String(data).substring(2);
+    var anim = document.getElementById('tani')
+    anim.classList.remove("circle");
+    void anim.offsetWidth;
+    anim.classList.add("circle");
+  }
+  else if(String(data).substring(0,2)=="p?"){
+    document.getElementById('pres').innerHTML = String(data).substring(2);
+    var anim = document.getElementById('pani')
+    anim.classList.remove("circle");
+    void anim.offsetWidth;
+    anim.classList.add("circle");
+  }
+  else if(String(data).substring(0,2)=="a?"){
+    document.getElementById('alti').innerHTML = String(data).substring(2);
+    var anim = document.getElementById('aani')
+    anim.classList.remove("circle");
+    void anim.offsetWidth;
+    anim.classList.add("circle");
+  }
+  else if(String(data).substring(0,2)=="m?"){
+    document.getElementById('status').innerHTML = String(data).substring(2);
+    var anim = document.getElementById('sani')
+    anim.classList.remove("circle");
+    void anim.offsetWidth;
+    anim.classList.add("circle");
+  }
+}
+function onLoad(event) {
+  initWebSockets();
+}
+function updatenow(event) {
+  ADCws.send("Update")
+}
+function onClose(event) {
+  console.log('Connection Closed');
+  setTimeout(initWebSockets, 2000);
+}
+</script>
+</body>
+</html>

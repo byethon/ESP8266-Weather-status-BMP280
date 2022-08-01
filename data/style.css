@@ -1,0 +1,85 @@
+    html {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: white;
+    }
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ea510b;
+    }
+    text1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #0a69b7;
+    }
+    .topnav {
+      overflow: hidden;
+      background-color: #ea510b;
+    }
+    body {
+      margin: 0;
+    }
+    .content {
+      padding: 30px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .card {
+      background-color: #F8F7F9;
+      box-shadow: 2px 2px 12px 1px rgba(140,140,140,.5);
+      padding-top: 10px;
+      padding-bottom: 20px;
+    }
+    .button {
+      padding: 15px 50px;
+      font-size: 24px;
+      text-align: center;
+      outline: none;
+      color: #fff;
+      background-color: #ff5100;
+      border-radius: 5px;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+    .button:active {
+      background-color: #0f8b8d;
+      box-shadow: 2 2px #CDCDCD;
+      transform: translate(2px);
+    }
+    .display {
+      padding: 15px 50px;
+      font-size: 24px;
+      text-align: center;
+      outline: none;
+      color: #fff;
+      background-color: #c1f7f8;
+    }
+    .circle {
+      opacity: 0;
+      margin-left: 5px;
+      display: inline;
+      height: 8px;
+      width: 8px;
+      position: fixed;
+      background-color: #ea510b;
+      border-radius: 50%;
+      border: 3px dotted #000;
+      animation: Rotate 0.5s ease-out;
+    }
+    @keyframes Rotate {
+      0% {opacity: 1;}
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
